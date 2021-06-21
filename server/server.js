@@ -7,9 +7,9 @@ app.use(express.json());
 
 let con = mysql.createConnection({
     host: "remotemysql.com",
-    user: "VcOGOelpLZ",
-    password: "KnqHhkUM58",
-    database: "VcOGOelpLZ",
+    user: "xRRgDKYU12",
+    password: "6Fm51qF6UV",
+    database: "xRRgDKYU12",
     insecureAuth: true
 });
 

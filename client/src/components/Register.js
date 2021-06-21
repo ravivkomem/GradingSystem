@@ -40,7 +40,7 @@ class Register extends React.Component {
             return;
         }
         if (password.length <= 1) {
-            alert("Password must be greater then 1");
+            alert("Password must be longer than 1");
             return;
         }
 
