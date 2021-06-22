@@ -49,12 +49,12 @@ class LecturerCourses extends React.Component {
             this.props.history.push('/');
             return;
         }
-        if (this.state.coursesResponse === null) {
+        if (this.state.SelectedCourse === null) {
             alert("Please select a course...");
             return;
         }
 
-        /* TODO - RAVIV */
+        this.props.history.push('/CourseParticipants/'+this.state.SelectedCourse.CourseName);
     };
 
     render() {
@@ -72,9 +72,9 @@ class LecturerCourses extends React.Component {
                             as="select"
                             onChange={e => this.setState({SelectedCourse: JSON.parse(e.target.value)})}
                         >
-                        
+                        <option>---</option>
                         {
-                            this.state.coursesResponse === null ? <option>---</option>
+                            this.state.coursesResponse === null ? null
                             :
                             this.state.coursesResponse.map((course, key) => {
                                 return(

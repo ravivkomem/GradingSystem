@@ -17,6 +17,8 @@ import NewCourse from './components/NewCourse';
 import RegisterCourse from './components/RegisterCourse';
 import LecturerCourses from './components/LecturerCourses';
 import StudentCourses from './components/StudentCourses';
+import CourseParticipants from './components/CourseParticipants';
+
 // Images
 import background from "./img/background.jpg"
 
@@ -57,6 +59,7 @@ class App extends React.Component {
                         <Route path="/RegisterCourse" component={RegisterCourse} />
                         <Route path="/LecturerCourses" component={LecturerCourses} />
                         <Route path="/StudentCourses" component={StudentCourses} />
+                        <Route path="/CourseParticipants/:name" component={CourseParticipants} />
                     </Switch>
                 </Router>
             </div>
