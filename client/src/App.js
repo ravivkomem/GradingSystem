@@ -5,12 +5,14 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Welcome from './components/Welcome'
+
 import About from "./components/About";
 import NewCourse from './components/NewCourse';
 import RegisterCourse from './components/RegisterCourse';
 import LecturerCourses from './components/LecturerCourses';
 import StudentCourses from './components/StudentCourses';
 import CourseParticipants from './components/CourseParticipants';
+import Reports from './components/Reports';
 // Images
 import background from "./img/background.jpg"
 
@@ -42,11 +44,13 @@ class App extends React.Component {
                                 <Home />
                             </div>
                         </Route>
+
                         <Route path="/About" component={About} />
                         <Route path="/NewCourse" component={NewCourse} />
                         <Route path="/RegisterCourse" component={RegisterCourse} />
                         <Route path="/LecturerCourses" component={LecturerCourses} />
                         <Route path="/StudentCourses" component={StudentCourses} />
+                        <Route path="/Reports" component ={Reports} />
                         <Route path="/CourseParticipants/:name" component={CourseParticipants} />
                     </Switch>
                 </Router>
