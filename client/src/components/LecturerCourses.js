@@ -119,12 +119,10 @@ class LecturerCourses extends React.Component {
                     <Button variant="primary" type="submit">
                         View Course Students
                     </Button>
-                </center>
-                
+                </center>           
             </Form>
         );
     }
-    
 }
 
 export default LecturerCourses;

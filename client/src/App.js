@@ -55,6 +55,7 @@ class App extends React.Component {
                         <Route path="/NewCourse" component={NewCourse} />
                         <Route path="/RegisterCourse" component={RegisterCourse} />
                         <Route path="/LecturerCourses" component={LecturerCourses} />
+                        <Route path="/StudentCourses" component={StudentCourses} />
                     </Switch>
                 </Router>
             </div>
