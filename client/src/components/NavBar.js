@@ -52,10 +52,9 @@ class NavBar extends React.Component {
                         {!isUserLecturer() ? <Nav.Link><Link to="/MyGrades">My Grades</Link></Nav.Link> : null}
                         {isUserLecturer() ? <Nav.Link><Link to="/Scoreboard">Scoreboard</Link></Nav.Link> : null}
                         {isUserLecturer() ? <Nav.Link><Link to="/NewCourse">New Course</Link></Nav.Link> : null}
+                        {isUserLecturer() ? <Nav.Link><Link to="/LecturerCourses">Lecturer Courses</Link></Nav.Link> : null}
                         <Nav.Link><Link to="/About">About</Link></Nav.Link>
                         <Nav.Link><Link to="/" onClick={() => this.refreshPage()}>Logout</Link></Nav.Link>
-
-
                     </Nav>
                     :
                     null
