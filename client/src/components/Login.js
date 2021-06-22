@@ -31,10 +31,10 @@ class Login extends React.Component {
                     Password: this.state.Password,
                 })
         };
-        const response = await fetch('/login', requestMsg);
+        const response = await fetch('/Login', requestMsg);
         console.log(response);
         if (!response.ok) {
-            alert('Invalid login details');
+            alert('Something Went Wrong');
             return;
         }
         let responseData = await response.json();

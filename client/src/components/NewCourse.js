@@ -47,7 +47,7 @@ class NewCourse extends React.Component {
         };
 
         // Wait for server response
-        const response = await fetch('/createCourse', requestMsg);
+        const response = await fetch('/CreateCourse', requestMsg);
         if (!response.ok) {
             alert('Could not create new course, please try again later');
             return;

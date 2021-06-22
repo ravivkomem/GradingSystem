@@ -54,7 +54,7 @@ class Register extends React.Component {
                 })
         };
 
-        const response = await fetch('/register', requestMsg)
+        const response = await fetch('/Register', requestMsg)
         console.log(response);
         if (!response.ok) {
             alert('Invalid registration details');
