@@ -2,8 +2,8 @@
 /* #         I M P O R T S                   # */
 /* ########################################### */
 import React from 'react'
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
+import Card from "react-bootstrap/Card";
 
 /* ########################################### */
 /* #  C L A S S   D E F I N I T I O N        # */
@@ -29,7 +29,7 @@ class StudentCourses extends React.Component {
             body: JSON.stringify(
                 {
                     title: "GetStudentCourses",
-                    LecturerId: userDetails.UserId,
+                    StudentId: userDetails.UserId,
                 })
         };
         await fetch('/GetStudentCourses', requestMsg)
@@ -42,31 +42,33 @@ class StudentCourses extends React.Component {
 
     render() {
         return (
-            // <Form className="container-fluid contact-info-container">
-            //     <h2 className="mb-3">Student Courses</h2>
-            //     <center>
-            //         {this.state.coursesResponse === null ?
-            //         <div>Loading Data From Server</div>
-            //         : null}
-            //         {/* Courses List  */}
-                    
-            //                 this.state.coursesResponse === null ? <option>---</option>
-            //                 :
-            //                 this.state.coursesResponse.map((course, key) => {
-            //                     return(
-            //                         <Card style={{ width: '18rem' }}>
-            //                         <Card.Header>this.state.</Card.Header>
-            //                             <ListGroup variant="flush">
-            //                                 <ListGroup.Item>Cras justo odio</ListGroup.Item>
-            //                                 <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-            //                                 <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-            //                             </ListGroup>
-            //                         </Card>
-            //                     );
-            //                 })
-            //             }
-            //     </center>                
-            // </Form>
+            <center>
+            <h2 className="mb-3">Student Courses</h2>
+            {this.state.coursesResponse === null ?
+            <div>Loading Data From Server</div>
+            : null}
+            {/* Courses List  */}
+            {
+                this.state.coursesResponse === null ? null
+                :
+                this.state.coursesResponse.map((course, key) => {
+                    return(
+                        <Card style={{ width: '18rem' }}>
+                        <Card.Title>{course.CourseName}</Card.Title>
+                        <ListGroup variant="flush">
+                            <ListGroup.Item>Credits: {course.Credits}</ListGroup.Item>
+                            {
+                            course.Grade === null ?
+                            <ListGroup.Item>Grade: Missing</ListGroup.Item>
+                            :
+                            <ListGroup.Item>Grade: {course.Grade}</ListGroup.Item>
+                            }
+                        </ListGroup>
+                        </Card>
+                    );
+                })
+            }
+            </center>
         );
     }
 }

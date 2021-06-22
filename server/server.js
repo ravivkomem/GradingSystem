@@ -396,7 +396,7 @@ app.post('/GetStudentCourses', (req, res) => {
     }
 
     // returns courses list and grade per course
-    let query = "SELECT CourseName, Grade FROM CourseStudents WHERE StudentId = ?";
+    let query = "SELECT CourseName, Grade, (SELECT Credits FROM Courses WHERE Courses.CourseName = CourseStudents.CourseName) AS Credits FROM CourseStudents WHERE StudentId = ?";
     con.query(query, [req.body.StudentId], function (err, result) {
         if (err) throw err;
         console.log(result);

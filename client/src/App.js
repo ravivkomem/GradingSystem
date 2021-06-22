@@ -16,6 +16,7 @@ import About from "./components/About";
 import NewCourse from './components/NewCourse';
 import RegisterCourse from './components/RegisterCourse';
 import LecturerCourses from './components/LecturerCourses';
+import StudentCourses from './components/StudentCourses';
 // Images
 import background from "./img/background.jpg"
 
