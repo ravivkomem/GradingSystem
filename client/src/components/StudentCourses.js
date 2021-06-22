@@ -41,6 +41,9 @@ class StudentCourses extends React.Component {
     };
 
     render() {
+        let avgGrade = 0;
+        let avgCount = 0;
+        let sumCreditsPassed = 0;
         return (
             <center>
             <h2 className="mb-3">Student Courses</h2>
@@ -52,6 +55,13 @@ class StudentCourses extends React.Component {
                 this.state.coursesResponse === null ? null
                 :
                 this.state.coursesResponse.map((course, key) => {
+                    if (course.Grade !== null) {
+                        avgGrade += course.Grade;
+                        avgCount++;
+                        if (course.Grade >= 55)
+                            sumCreditsPassed += course.Credits;
+                    }
+                    
                     return(
                         <Card style={{ width: '18rem' }}>
                         <Card.Title>{course.CourseName}</Card.Title>
@@ -68,6 +78,8 @@ class StudentCourses extends React.Component {
                     );
                 })
             }
+            <h2 className="mb-3">Credits Passed: {sumCreditsPassed}</h2>
+            <h2 className="mb-3">Average Grade: {avgGrade}</h2>
             </center>
         );
     }
