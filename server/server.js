@@ -257,3 +257,20 @@ app.post('/createCourse', (req, res) => {
             }
         });
 });
+
+app.post('/getAllCourses', (req, res) => {
+    console.log("POST getAllCourses");
+    console.log(req.body);
+    if (req.body.title !== "getAllCourses") {
+        res.status(400);
+        res.send("Something Went Wrong");
+        return;
+    }
+
+    let query = "SELECT * FROM Courses";
+    con.query(query, '', function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+    });
+});
