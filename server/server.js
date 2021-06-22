@@ -13,66 +13,87 @@ let con = mysql.createConnection({
     insecureAuth: true
 });
 
-app.get('/Scoreboard', (req, res) => {
-    console.log("Scoreboard server");
-    res.header('Access-Control-Allow-Origin', '*');
-    var sql = "SELECT Id, Mathematics, English, Biology, Physics FROM `Scoreboard`";
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        res.send(result)
-    });
+app.listen(port, () => {
+    console.log(`GradesSystem app listening at http://localhost:${port}`);
 });
 
-app.post('/getUserGrades', (req, res) => {
+/* ------------------------ database functions ------------------------ */
 
-    console.log("getUserGrades");
-    let query = "SELECT * FROM Scoreboard WHERE `Id` = ?";
-    con.query(query, req.body.ID, function (err, result) {
-        if (err) throw err;
-        res.send(result);
-        // console.log(result)
-    });
+/* ----- Scoreboard ----- */
 
+// app.get('/Scoreboard', (req, res) => {
+//     console.log("Scoreboard server");
+//     res.header('Access-Control-Allow-Origin', '*');
+//     var sql = "SELECT Id, Mathematics, English, Biology, Physics FROM `Scoreboard`";
+//     con.query(sql, function (err, result) {
+//         if (err) throw err;
+//         res.send(result)
+//     });
+// });
 
-});
+// app.post('/getUserGrades', (req, res) => {
+//     console.log("getUserGrades");
+//     let query = "SELECT * FROM Scoreboard WHERE `Id` = ?";
+//     con.query(query, req.body.ID, function (err, result) {
+//         if (err) throw err;
+//         res.send(result);
+//         // console.log(result)
+//     });
+// });
 
+// app.post('/Remove', (req, res) => {
+//     console.log("GET user");
+//     res.header('Access-Control-Allow-Origin', '*');
+//     let query = "Delete FROM Scoreboard WHERE Id = ?";
+//     con.query(query, req.body.ID, function (err, result) {
+//         if (err) throw err;
+//         res.send(result);
+//         console.log(result);
+//     });
+// });
 
+// app.post('/updateRow', (req, res) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     let sql = `UPDATE Scoreboard SET Id='${req.body.Id}', FullName='${req.body.FullName}', Mathematics='${req.body.Mathematics}', English='${req.body.English}',  Biology='${req.body.Biology}', Physics='${req.body.Physics}' WHERE Id='${req.body.Id}'`;
+//     con.query(sql, function (err, result) {
+//         if (err) throw err;
+//         res.send(result);
+//     });
+// })
 
-app.post('/Remove', (req, res) => {
-    console.log("GET user");
-    res.header('Access-Control-Allow-Origin', '*');
-    let query = "Delete FROM Scoreboard WHERE Id = ?";
-    con.query(query, req.body.ID, function (err, result) {
-        if (err) throw err;
-        res.send(result);
-        console.log(result);
-    });
-});
+// app.post('/addRow', (req, res) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     let sql = `INSERT INTO Scoreboard (Id, FullName, Mathematics, English, Biology, Physics) VALUES ('${req.body.Id}', '${req.body.FullName}', '${req.body.Mathematics}','${req.body.English}', '${req.body.Biology}', '${req.body.Physics}')`;
+//     con.query(sql, function (err, result) {
+//         if (err) throw err;
+//         res.send(result);
+//     });
+// })
 
+/* ----- Users ----- */
 
 app.post('/login', (req, res) => {
     console.log("POST Login");
+    console.log(req.body);
     if (req.body.title !== "Login") {
         res.status(400);
-        res.send("Bad Request.");
+        res.send("Something Went Wrong");
         return;
     }
 
-    let query = "SELECT * FROM Users WHERE Id = ? AND Password = ?";
-    // console.log(query);
-    con.query(query, [req.body.ID, req.body.Password],
+    let query = "SELECT * FROM Users WHERE UserId = ? AND Password = ?";
+    con.query(query, [req.body.UserId, req.body.Password],
         function (err, result) {
             if (err) {
                 res.status(500);
                 res.send(err);
                 return;
             }
-            // console.log(result.length === 0);
-            if (result.length === 0) {
+            if (result.length === 0) { /* query returned nothing */
                 res.status(400);
-                res.send("Invalid login parameters.");
-            } else {
-                // console.log(result[0]);
+                res.send("UserId or Password incorrect");
+            }
+            else { /* send login details to client */
                 const resMsg = {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'},
@@ -80,62 +101,51 @@ app.post('/login', (req, res) => {
                         {
                             title: 'Login',
                             loginResult: 'OK',
-                            id: result[0].Id,
-                            FullName: result[0].FullName,
-                            IsLecturer: result[0].IsLecturer
+                            UserId: result[0].UserId,
+                            UserName: result[0].UserName,
+                            Permission: result[0].Permission
                         })
                 };
-                // console.log(resMsg);
-                res.type('application/json'); // =>'application/json'
+                res.type('application/json');
                 res.send(resMsg);
-
             }
         });
-
-
 });
 
 app.post('/register', (req, res) => {
-
     console.log("POST register");
-
+    console.log(req.body);
     if (req.body.title !== "Register") {
         res.status(400);
-        res.send("Bad Request.");
+        res.send("Something Went Wrong");
         return;
     }
-
-    /* Check if user already exist */
-
-    con.query("SELECT * FROM Users WHERE Id = ?", [req.body.ID],
+    
+    con.query("SELECT * FROM Users WHERE UserId = ?", [req.body.UserId],
         function (err, result) {
             if (err) {
                 res.status(500);
                 res.send(err);
                 return;
             }
-            if (result.length !== 0) {
+            if (result.length !== 0) { /* query returned something */
                 res.status(400);
-                res.send("User already exists");
-            } else {
-
-                /* Insert new user */
-                var query = `INSERT INTO Users (Id,FullName, Password, IsLecturer) VALUES ('${req.body.ID}','${req.body.FullName}', '${req.body.Password}', '${req.body.IsLecturer ? 1 : 0}')`;
-                console.log(query);
-                con.query(query, [req.body.FullName, req.body.Password],
+                res.send("UserId already exists");
+            }
+            else { /* add new user */
+                var query = `INSERT INTO Users (UserId, UserName, Password, Permission) VALUES ('${req.body.UserId}','${req.body.UserName}', '${req.body.Password}', '${req.body.Permission ? 1 : 0}')`;
+                con.query(query, [req.body.UserName, req.body.Password],
                     function (err, result) {
                         if (err) {
                             res.status(500);
                             res.send(err);
-                            throw err;
                             return;
                         }
-                        ;
-
-                        if (result.length === 0) {
+                        if (result.length === 0) { /* query returned nothing */
                             res.status(400);
-                            res.send("Invalid login parameters.");
-                        } else {
+                            res.send("Registration not complete");
+                        }
+                        else { /* send registration details to client */
                             const resMsg = {
                                 method: 'GET',
                                 headers: {'Content-Type': 'application/json'},
@@ -146,80 +156,50 @@ app.post('/register', (req, res) => {
                                     })
                             };
                             console.log(resMsg);
-                            res.type('application/json'); // =>'application/json'
+                            res.type('application/json');
                             res.send(resMsg);
                         }
                     });
             }
         });
-
-
 });
 
-app.post('/getUserType', (req, res) => {
+// app.post('/getUserType', (req, res) => {
+//     console.log("POST getUserType");
+//     console.log(req.body);
+//     if (UserName === "" || Password === "") {
+//         res.status(400);
+//         res.send("UserName or Password missing");
+//         return;
+//     }
 
-    console.log("POST getUserType");
-    console.log(req.body);
-
-    if (FullName === "" || Password === "") {
-        res.status(400);
-        res.send("Invalid User parameters.");
-        return;
-    }
-
-    let query = "SELECT * FROM Users WHERE FullName = ? AND Password = ?";
-
-    con.query(query, [req.body.FullName.toLowerCase(), req.body.Password],
-        function (err, result) {
-            if (err) {
-                res.status(500);
-                res.send(err);
-                return;
-            }
-            ;
-
-            console.log(result.length === 0);
-            if (result.length === 0) {
-                res.status(400)
-                res.send("Invalid User parameters.");
-                return;
-            } else {
-                const resMsg = {
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(
-                        {
-                            title: 'UserDetails',
-                            loginResult: 'OK',
-                            IsLecturer: result[0].IsLecturer,
-                        })
-                };
-                console.log(resMsg);
-                res.type('application/json'); // =>'application/json'
-                res.send(resMsg);
-            }
-        });
-
-});
-
-app.post('/updateRow', (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    let sql = `UPDATE Scoreboard SET Id='${req.body.Id}', FullName='${req.body.FullName}', Mathematics='${req.body.Mathematics}', English='${req.body.English}',  Biology='${req.body.Biology}', Physics='${req.body.Physics}' WHERE Id='${req.body.Id}'`;
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        res.send(result);
-    });
-})
-
-app.post('/addRow', (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    let sql = `INSERT INTO Scoreboard (Id, FullName, Mathematics, English, Biology, Physics) VALUES ('${req.body.Id}', '${req.body.FullName}', '${req.body.Mathematics}','${req.body.English}', '${req.body.Biology}', '${req.body.Physics}')`;
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        res.send(result);
-    });
-})
-
-app.listen(port, () => {
-    console.log(`GradesSystem app listening at http://localhost:${port}`);
-});
+//     let query = "SELECT * FROM Users WHERE UserName = ? AND Password = ?";
+//     con.query(query, [req.body.UserName.toLowerCase(), req.body.Password],
+//         function (err, result) {
+//             if (err) {
+//                 res.status(500);
+//                 res.send(err);
+//                 return;
+//             }
+//             if (result.length === 0) { /* query returned nothing */
+//                 res.status(400);
+//                 res.send("UserName not found");
+//                 return;
+//             }
+//             else {
+//                 const resMsg = {
+//                     method: 'GET',
+//                     headers: {'Content-Type': 'application/json'},
+//                     body: JSON.stringify(
+//                         {
+//                             title: 'UserDetails',
+//                             loginResult: 'OK',
+//                             Permission: result[0].Permission,
+//                         })
+//                 };
+//                 console.log(resMsg);
+//                 res.type('application/json');
+//                 res.send(resMsg);
+//             }
+//         });
+// });

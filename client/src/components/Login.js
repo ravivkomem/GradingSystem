@@ -9,9 +9,9 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ID: '',
-            FullName: '',
-            password: '',
+            UserId: '',
+            UserName: '',
+            Password: '',
             data: '',
             getData: false
         }
@@ -20,7 +20,6 @@ class Login extends React.Component {
     componentDidMount = async () => {
     };
 
-
     loginUser = async () => {
         const requestMsg = {
             method: 'POST',
@@ -28,16 +27,14 @@ class Login extends React.Component {
             body: JSON.stringify(
                 {
                     title: 'Login',
-                    ID: this.state.ID,
-                    Password: this.state.password,
+                    UserId: this.state.UserId,
+                    Password: this.state.Password,
                 })
         };
-        console.log("requesting");
-
         const response = await fetch('/login', requestMsg);
-
+        console.log(response);
         if (!response.ok) {
-            alert('Invalid Login Details');
+            alert('Invalid login details');
             return;
         }
         let responseData = await response.json();
@@ -45,12 +42,10 @@ class Login extends React.Component {
         sessionStorage.setItem(
             'User',
             JSON.stringify({
-                ID: this.state.ID,
-                FullName: responseData.FullName,
-                IsLecturer: responseData.IsLecturer,
+                UserId: this.state.UserId,
+                UserName: responseData.UserName,
+                Permission: responseData.Permission,
             }));
-
-
         return (this.props.history.push('/home'));
     };
 
@@ -61,11 +56,11 @@ class Login extends React.Component {
                 <div>
                     <Form>
                         <Form.Group controlId="fID">
-                            <Form.Label>Personal ID</Form.Label>
+                            <Form.Label>UserId</Form.Label>
                             <Form.Control
-                                placeholder="Your Personal ID Number"
-                                value={this.state.ID}
-                                onChange={e => this.setState({ID: e.target.value})}
+                                placeholder="UserId"
+                                value={this.state.UserId}
+                                onChange={e => this.setState({UserId: e.target.value})}
                                 required/>
                         </Form.Group>
 
@@ -74,8 +69,8 @@ class Login extends React.Component {
                             <Form.Control
                                 type="password"
                                 placeholder="Password"
-                                value={this.state.password}
-                                onChange={e => this.setState({password: e.target.value})}
+                                value={this.state.Password}
+                                onChange={e => this.setState({Password: e.target.value})}
                                 required/>
                         </Form.Group>
                         <Button onClick={this.loginUser}>Login</Button>

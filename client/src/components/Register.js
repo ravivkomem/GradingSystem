@@ -8,39 +8,36 @@ class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            FullName: '',
-            password: '',
-            ID: '',
+            UserName: '',
+            Password: '',
+            UserId: '',
             userType: '',
-            isLecturer: false,
+            Permission: false,
             data: '',
             getData: false
         };
 
         this.onValueChange = this.onValueChange.bind(this);
-
     }
-
 
     registration = async (e) => {
         e.preventDefault();
-        let ID = this.state.ID;
-        let FullName = this.state.FullName;
-        let password = this.state.password;
+        let UserId = this.state.UserId;
+        let UserName = this.state.UserName;
+        let Password = this.state.Password;
 
-        /* FullName and password sanity check*/
-
-        if (FullName === "" || password === "") {
-            alert("You must enter FullName and password");
+        /* UserName and Password Sanity check*/
+        if (UserName === "" || Password === "") {
+            alert("UserName or Password missing");
             return;
         }
         let english = /^[A-Za-z0-9]*$/;
-        if (!english.test(FullName)) {
-            alert("FullName must be in english letters.");
+        if (!english.test(UserName)) {
+            alert("UserName must be in english letters");
             return;
         }
-        if (password.length <= 1) {
-            alert("Password must be longer than 1");
+        if (Password.length <= 1) {
+            alert("Password must be longer than 1 character");
             return;
         }
 
@@ -50,61 +47,52 @@ class Register extends React.Component {
             body: JSON.stringify(
                 {
                     title: 'Register',
-                    ID: this.state.ID,
-                    FullName: this.state.FullName,
-                    Password: this.state.password,
-                    IsLecturer: this.state.isLecturer
+                    UserId: this.state.UserId,
+                    UserName: this.state.UserName,
+                    Password: this.state.Password,
+                    Permission: this.state.Permission
                 })
         };
-
-        console.log("requesting");
 
         const response = await fetch('/register', requestMsg)
         console.log(response);
         if (!response.ok) {
-            alert('Invalid Registration Details');
+            alert('Invalid registration details');
             return;
         }
         const responseData = await response.json();
         console.log(responseData);
-        alert('Registered! Please login.')
-
+        alert('Registration complete')
     };
-
-
-
 
     onValueChange() {
         this.setState({
-            isLecturer: !this.state.isLecturer
+            Permission: !this.state.Permission
         });
     }
 
-
     render() {
-
         return (
-
             <div>
                 <center><h1 style={{fontFamily: 'Merriweather Sans, sans-serif'}}>Registration</h1></center>
                 <div>
                     <Form onSubmit={this.registration}>
                         <Form.Group controlId="fID">
-                            <Form.Label>Personal ID</Form.Label>
+                            <Form.Label>UserId</Form.Label>
                             <Form.Control
                                 id='regEmail'
-                                placeholder="Your Personal ID Number"
-                                value={this.state.ID}
-                                onChange={e => this.setState({ID: e.target.value})}
+                                placeholder="UserId"
+                                value={this.state.UserId}
+                                onChange={e => this.setState({UserId: e.target.value})}
                                 required/>
                         </Form.Group>
 
                         <Form.Group controlId="fFullName">
-                            <Form.Label>FullName</Form.Label>
+                            <Form.Label>UserName</Form.Label>
                             <Form.Control
-                                placeholder="Your Full Name"
-                                value={this.state.FullName}
-                                onChange={e => this.setState({FullName: e.target.value})}
+                                placeholder="UserName"
+                                value={this.state.UserName}
+                                onChange={e => this.setState({UserName: e.target.value})}
                                 required/>
                         </Form.Group>
 
@@ -113,8 +101,8 @@ class Register extends React.Component {
                             <Form.Control
                                 type="password"
                                 placeholder="Password"
-                                value={this.state.password}
-                                onChange={e => this.setState({ password: e.target.value })}
+                                value={this.state.Password}
+                                onChange={e => this.setState({Password: e.target.value})}
                                 required />
                         </Form.Group>
                         
@@ -125,16 +113,16 @@ class Register extends React.Component {
                                 <Form.Check
                                     id='student'
                                     type="radio"
-                                    label="I am a student"
-                                    checked={!this.state.isLecturer}
+                                    label="Student"
+                                    checked={!this.state.Permission}
                                     onChange={this.onValueChange}
                                 />
                                 <Form.Check
                                     id='lecturer'
                                     width='10px'
                                     type="radio"
-                                    label="I am a lecturer"
-                                    checked={this.state.isLecturer}
+                                    label="Lecturer"
+                                    checked={this.state.Permission}
                                     onChange={this.onValueChange}
                                 />
                             </Form.Group>
@@ -142,12 +130,10 @@ class Register extends React.Component {
                         <Button type="submit" id='registerBtn'> Register </Button>
 
                     </Form>
-
                 </div>
             </div>
         );
     }
 }
-
 
 export default withRouter(Register);

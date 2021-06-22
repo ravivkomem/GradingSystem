@@ -1,7 +1,7 @@
 
 export function isUserLecturer() {
     let UserData = JSON.parse(sessionStorage.getItem('User'));
-    return UserData.IsLecturer === 1;
+    return UserData.Permission === 1;
 }
 
 export function isUserLoggedIn() {
