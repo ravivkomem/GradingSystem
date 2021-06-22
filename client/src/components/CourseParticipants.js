@@ -52,7 +52,7 @@ class CourseParticipants extends React.Component {
         let studentId = this.state.studentsResponse[studentKey].StudentId;
         let courseName = String(this.props.match.params.name);
         let newGrade = parseInt(this.state.studentsResponse[studentKey].Grade);
-         /* TODO - RAVIV */
+        
         console.log("Editing student Id: " + studentId);
         console.log("New Grade is: " + newGrade);
 
@@ -106,9 +106,6 @@ class CourseParticipants extends React.Component {
              alert("Grade edited successfully!");
              return;
          }
-
-
-       
     };
 
     render() {

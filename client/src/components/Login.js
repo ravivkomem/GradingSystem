@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {withRouter} from 'react-router-dom';
 import Button from "react-bootstrap/Button";
-import {UserContext} from "../UserContext";
 import Form from "react-bootstrap/Form";
 
 class Login extends React.Component {
@@ -75,7 +74,6 @@ class Login extends React.Component {
                                 required/>
                         </Form.Group>
                         <Button onClick={this.loginUser}>Login</Button>
-
                     </Form>
                 </div>
             </div>

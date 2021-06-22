@@ -1,13 +1,7 @@
-/* ########################################### */
-/* #         I M P O R T S                   # */
-/* ########################################### */
 import React from 'react'
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 
-/* ########################################### */
-/* #  C L A S S   D E F I N I T I O N        # */
-/* ########################################### */
 class StudentCourses extends React.Component {
 
     constructor(props) 

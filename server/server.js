@@ -19,57 +19,6 @@ app.listen(port, () => {
 
 /* ------------------------ database functions ------------------------ */
 
-/* ----- Scoreboard ----- */
-
-// app.get('/Scoreboard', (req, res) => {
-//     console.log("Scoreboard server");
-//     res.header('Access-Control-Allow-Origin', '*');
-//     var sql = "SELECT Id, Mathematics, English, Biology, Physics FROM `Scoreboard`";
-//     con.query(sql, function (err, result) {
-//         if (err) throw err;
-//         res.send(result)
-//     });
-// });
-
-// app.post('/getUserGrades', (req, res) => {
-//     console.log("getUserGrades");
-//     let query = "SELECT * FROM Scoreboard WHERE `Id` = ?";
-//     con.query(query, req.body.ID, function (err, result) {
-//         if (err) throw err;
-//         res.send(result);
-//         // console.log(result)
-//     });
-// });
-
-// app.post('/Remove', (req, res) => {
-//     console.log("GET user");
-//     res.header('Access-Control-Allow-Origin', '*');
-//     let query = "Delete FROM Scoreboard WHERE Id = ?";
-//     con.query(query, req.body.ID, function (err, result) {
-//         if (err) throw err;
-//         res.send(result);
-//         console.log(result);
-//     });
-// });
-
-// app.post('/updateRow', (req, res) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     let sql = `UPDATE Scoreboard SET Id='${req.body.Id}', FullName='${req.body.FullName}', Mathematics='${req.body.Mathematics}', English='${req.body.English}',  Biology='${req.body.Biology}', Physics='${req.body.Physics}' WHERE Id='${req.body.Id}'`;
-//     con.query(sql, function (err, result) {
-//         if (err) throw err;
-//         res.send(result);
-//     });
-// })
-
-// app.post('/addRow', (req, res) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     let sql = `INSERT INTO Scoreboard (Id, FullName, Mathematics, English, Biology, Physics) VALUES ('${req.body.Id}', '${req.body.FullName}', '${req.body.Mathematics}','${req.body.English}', '${req.body.Biology}', '${req.body.Physics}')`;
-//     con.query(sql, function (err, result) {
-//         if (err) throw err;
-//         res.send(result);
-//     });
-// })
-
 /* ----- Users Table ----- */
 
 /* --- User --- */
@@ -164,49 +113,9 @@ app.post('/Register', (req, res) => {
     });
 });
 
-// app.post('/getUserType', (req, res) => {
-//     console.log("POST getUserType");
-//     console.log(req.body);
-//     if (UserName === "" || Password === "") {
-//         res.status(400);
-//         res.send("UserName or Password missing");
-//         return;
-//     }
-
-//     let query = "SELECT * FROM Users WHERE UserName = ? AND Password = ?";
-//     con.query(query, [req.body.UserName.toLowerCase(), req.body.Password],
-//         function (err, result) {
-//             if (err) {
-//                 res.status(500);
-//                 res.send(err);
-//                 return;
-//             }
-//             if (result.length === 0) { /* query returned nothing */
-//                 res.status(400);
-//                 res.send("UserName not found");
-//                 return;
-//             }
-//             else {
-//                 const resMsg = {
-//                     method: 'GET',
-//                     headers: {'Content-Type': 'application/json'},
-//                     body: JSON.stringify(
-//                         {
-//                             title: 'UserDetails',
-//                             loginResult: 'OK',
-//                             Permission: result[0].Permission,
-//                         })
-//                 };
-//                 console.log(resMsg);
-//                 res.type('application/json');
-//                 res.send(resMsg);
-//             }
-//         });
-// });
-
 /* ----- Courses Table ----- */
 
-/* --- Lecturer ---*/
+/* --- Lecturer --- */
 
 app.post('/CreateCourse', (req, res) => {
     console.log("POST CreateCourse");
@@ -313,7 +222,7 @@ app.post('/SetGrade', (req, res) => {
     });
 });
 
-/* --- Student ---*/
+/* --- Student --- */
 
 app.post('/GetCourses', (req, res) => {
     console.log("POST GetCourses");

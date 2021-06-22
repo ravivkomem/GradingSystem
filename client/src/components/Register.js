@@ -128,7 +128,6 @@ class Register extends React.Component {
                             </Form.Group>
                         </fieldset>
                         <Button type="submit" id='registerBtn'> Register </Button>
-
                     </Form>
                 </div>
             </div>

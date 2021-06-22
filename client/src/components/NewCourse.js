@@ -115,12 +115,10 @@ class NewCourse extends React.Component {
                         Add Course
                     </Button>
                 </center>
-                
             </Form>
         );
     }
     
 }
-
 
 export default NewCourse;

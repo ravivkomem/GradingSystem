@@ -53,7 +53,6 @@ class LecturerCourses extends React.Component {
             alert("Please select a course...");
             return;
         }
-
         this.props.history.push('/CourseParticipants/'+this.state.SelectedCourse.CourseName);
     };
 

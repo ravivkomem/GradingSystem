@@ -45,12 +45,10 @@ class NavBar extends React.Component {
 
                 {isUserLoggedIn() ?
                     <Nav className="mr-auto">
-                        {/* <Nav.Link href="#home">Home</Nav.Link> */}
                         <Nav.Link><Link to="/home">Home</Link></Nav.Link>
                         {console.log("isTch = " + isUserLecturer())}
                         {!isUserLecturer() ? <Nav.Link><Link to="/RegisterCourse">Enroll to Course</Link></Nav.Link> : null}
                         {!isUserLecturer() ? <Nav.Link><Link to="/StudentCourses">Grades</Link></Nav.Link> : null}
-                        {isUserLecturer() ? <Nav.Link><Link to="/Scoreboard">Scoreboard</Link></Nav.Link> : null}
                         {isUserLecturer() ? <Nav.Link><Link to="/NewCourse">New Course</Link></Nav.Link> : null}
                         {isUserLecturer() ? <Nav.Link><Link to="/LecturerCourses">Lecturer Courses</Link></Nav.Link> : null}
                         <Nav.Link><Link to="/About">About</Link></Nav.Link>
@@ -59,11 +57,9 @@ class NavBar extends React.Component {
                     :
                     null
                 }
-
             </Navbar>
         );
     }
 }
 
 export default withRouter(NavBar);
-

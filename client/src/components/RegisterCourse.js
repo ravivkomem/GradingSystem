@@ -151,12 +151,10 @@ class RegisterCourse extends React.Component {
                         Enroll
                     </Button>
                 </center>
-                
             </Form>
         );
     }
     
 }
-
 
 export default RegisterCourse;

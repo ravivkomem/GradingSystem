@@ -9,9 +9,7 @@ class Logout extends React.Component {
 
     componentDidMount = async () => {
         sessionStorage.clear();
-
         this.props.history.push('/');
-
     };
 
     render() {

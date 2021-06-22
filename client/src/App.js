@@ -1,6 +1,3 @@
-/* ########################################### */
-/* #         I M P O R T S                   # */
-/* ########################################### */
 // React Elements
 import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
@@ -8,17 +5,12 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Welcome from './components/Welcome'
-import Scoreboard from './components/Scoreboard'
-import GradesTable from './components/GradesTable'
-import AddStudent from './components/AddStudent'
-import MyGrades from "./components/MyGrades";
 import About from "./components/About";
 import NewCourse from './components/NewCourse';
 import RegisterCourse from './components/RegisterCourse';
 import LecturerCourses from './components/LecturerCourses';
 import StudentCourses from './components/StudentCourses';
 import CourseParticipants from './components/CourseParticipants';
-
 // Images
 import background from "./img/background.jpg"
 
@@ -50,10 +42,6 @@ class App extends React.Component {
                                 <Home />
                             </div>
                         </Route>
-                        <Route path="/Scoreboard" component={Scoreboard} />
-                        <Route path="/GradesTable" component={GradesTable} />
-                        <Route path="/AddStudent" component={AddStudent} />
-                        <Route path="/MyGrades" component={MyGrades} />
                         <Route path="/About" component={About} />
                         <Route path="/NewCourse" component={NewCourse} />
                         <Route path="/RegisterCourse" component={RegisterCourse} />
@@ -66,5 +54,5 @@ class App extends React.Component {
         );
     }
 }
-export default App;
 
+export default App;
