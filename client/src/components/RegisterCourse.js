@@ -1,7 +1,7 @@
 /* ########################################### */
 /* #         I M P O R T S                   # */
 /* ########################################### */
-import React, { useDebugValue } from 'react'
+import React from 'react'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -42,56 +42,64 @@ class RegisterCourse extends React.Component {
             });
     };
 
-    registerCourse = async (e) => {
+    enrollCourse = async (e) => {
         e.preventDefault();
         // Data Validation
+        if (sessionStorage.getItem('User') === null)
+        {
+            alert("You have been disconnected...");
+            this.props.history.push('/');
+            return;
+        }
+
+        if (this.state.coursesResponse === null)
+        {
+            alert("Please select a course...");
+            return;
+        }
+
         let userDetails = JSON.parse(sessionStorage.getItem('User'));
-        console.log("Course ID: " + userDetails);
-        console.log("LecturerId: " + userDetails.UserId);
-        console.log("Course Name: " + this.state.CourseName);
-        console.log("Description: " + this.state.CourseDescription);
-        console.log("Credit Score: " + this.state.CreditScore);
+        console.log("Course Name: " + this.state.SelectedCourse.CourseName);
+        console.log("Student ID: " + userDetails.UserId)
 
         // Create The Server 'POST' Request 
-        console.log("Requesting Create New Course");
+        console.log("Requesting Enroll In Course");
         const requestMsg = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
                 {
-                    title: 'CreateCourse',
-                    LecturerId: userDetails.UserId,
-                    CourseName: this.state.CourseName,
-                    Description: this.state.CourseDescription,
-                    Credits: this.state.CreditScore,
+                    title: 'Enroll',
+                    CourseName: this.state.SelectedCourse.CourseName,
+                    StudentId: userDetails.UserId,
                 })
         };
 
         // Wait for server response
-        const response = await fetch('/createCourse', requestMsg);
+        const response = await fetch('/Enroll', requestMsg);
+        console.log(response)
+        console.log(requestMsg)
         if (!response.ok) {
-            alert('Could not create new course, please try again later');
+            alert('Could not enroll in course, please try again later');
             return;
         }
         else
         {
-            alert("Course added successfully!");
-            this.setState({CourseName: ''});
-            this.setState({CourseDescription: ''});
-            this.setState({CreditScore: 2});
+            alert("Enrolled successfully!");
+            this.setState({SelectedCourse: null});
+            this.props.history.push('/home');
+            return;
         }
         
     };
 
     render() {
-
-
         return (
-            <Form className="container-fluid contact-info-container" onSubmit={this.registerCourse}>
+            <Form className="container-fluid contact-info-container" onSubmit={this.enrollCourse}>
                 <h2 className="mb-3">Register to Courses</h2>
                 <center>
                     {this.state.coursesResponse === null ?
-                    <div>Loading Data From Server</div>
+                    <h1>Loading Data From Server</h1>
                     : null}
                     {/* Courses List  */}
                     <Form.Group controlId="coCourses">
@@ -100,9 +108,9 @@ class RegisterCourse extends React.Component {
                             as="select"
                             onChange={e => this.setState({SelectedCourse: JSON.parse(e.target.value)})}
                         >
-                        
+                        <option>---</option>
                         {
-                            this.state.coursesResponse === null ? <option>---</option>
+                            this.state.coursesResponse === null ? null
                             :
                             this.state.coursesResponse.map((course, key) => {
                                 return(
@@ -121,13 +129,28 @@ class RegisterCourse extends React.Component {
                             :
                             <Form.Control type="text" value={this.state.SelectedCourse.LecturerName} readOnly />
                         }
-                        
                     </Form.Group>
-                   
-
+                    {/* Credits */}
+                    <Form.Group controlId="coCredits">
+                        <Form.Label>Credits</Form.Label>
+                        {this.state.SelectedCourse === null ?
+                            <Form.Control type="text" value="---" readOnly />
+                            :
+                            <Form.Control type="text" value={this.state.SelectedCourse.Credits} readOnly />
+                        }
+                    </Form.Group>
+                    {/* Description */}
+                    <Form.Group controlId="coDescription">
+                        <Form.Label>Description</Form.Label>
+                        {this.state.SelectedCourse === null ?
+                            <Form.Control type="text" value="---" readOnly />
+                            :
+                            <Form.Control type="text" value={this.state.SelectedCourse.Description} readOnly />
+                        }
+                    </Form.Group>
                     {/* Add New Course */}
                     <Button variant="primary" type="submit">
-                        Register
+                        Enroll
                     </Button>
                 </center>
                 

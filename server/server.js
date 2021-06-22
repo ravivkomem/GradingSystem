@@ -352,6 +352,7 @@ app.post('/Enroll', (req, res) => {
         if (result.length !== 0) { /* query returned something */
             res.status(400);
             res.send("Already enrolled to " + req.body.CourseName);
+            console.log("Already enrolled to " + req.body.CourseName)
         }
         else { /* add student to course */
             var query = `INSERT INTO CourseStudents (CourseName, StudentId) VALUES ('${req.body.CourseName}', '${req.body.StudentId}')`;
@@ -364,6 +365,7 @@ app.post('/Enroll', (req, res) => {
                 if (result.length === 0) { /* query returned nothing */
                     res.status(400);
                     res.send("Enroll not complete");
+                    console.log("Enroll not complete")
                 }
                 else {
                     const resMsg = {
