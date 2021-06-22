@@ -14,6 +14,7 @@ import AddStudent from './components/AddStudent'
 import MyGrades from "./components/MyGrades";
 import About from "./components/About";
 import NewCourse from './components/NewCourse';
+import RegisterCourse from './components/RegisterCourse';
 // Images
 import background from "./img/background.jpg"
 
@@ -51,6 +52,7 @@ class App extends React.Component {
                         <Route path="/MyGrades" component={MyGrades} />
                         <Route path="/About" component={About} />
                         <Route path="/NewCourse" component={NewCourse} />
+                        <Route path="/RegisterCourse" component={RegisterCourse}></Route>
                     </Switch>
                 </Router>
             </div>
