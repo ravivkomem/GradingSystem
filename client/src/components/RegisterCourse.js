@@ -51,9 +51,7 @@ class RegisterCourse extends React.Component {
             this.props.history.push('/');
             return;
         }
-
-        if (this.state.coursesResponse === null)
-        {
+        if (this.state.SelectedCourse === null) {
             alert("Please select a course...");
             return;
         }
