@@ -48,7 +48,7 @@ class NavBar extends React.Component {
                         {/* <Nav.Link href="#home">Home</Nav.Link> */}
                         <Nav.Link><Link to="/home">Home</Link></Nav.Link>
                         {console.log("isTch = " + isUserLecturer())}
-                        {!isUserLecturer() ? <Nav.Link><Link to="/RegisterCourse">RegisterCourse</Link></Nav.Link> : null}
+                        {!isUserLecturer() ? <Nav.Link><Link to="/RegisterCourse">Enroll to Course</Link></Nav.Link> : null}
                         {!isUserLecturer() ? <Nav.Link><Link to="/MyGrades">My Grades</Link></Nav.Link> : null}
                         {isUserLecturer() ? <Nav.Link><Link to="/Scoreboard">Scoreboard</Link></Nav.Link> : null}
                         {isUserLecturer() ? <Nav.Link><Link to="/NewCourse">New Course</Link></Nav.Link> : null}
