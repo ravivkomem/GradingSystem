@@ -70,7 +70,7 @@ app.listen(port, () => {
 //     });
 // })
 
-/* ----- Users ----- */
+/* ----- Users Table ----- */
 
 app.post('/login', (req, res) => {
     console.log("POST Login");
@@ -203,3 +203,57 @@ app.post('/register', (req, res) => {
 //             }
 //         });
 // });
+
+/* ----- Courses Table ----- */
+
+app.post('/createCourse', (req, res) => {
+    console.log("POST createCourse");
+    console.log(req.body);
+    if (req.body.title !== "createCourse") {
+        res.status(400);
+        res.send("Something Went Wrong");
+        return;
+    }
+    
+    con.query("SELECT * FROM Courses WHERE CourseName = ?", [req.body.CourseName],
+        function (err, result) {
+            if (err) {
+                res.status(500);
+                res.send(err);
+                return;
+            }
+            if (result.length !== 0) { /* query returned something */
+                res.status(400);
+                res.send("CourseName already exists");
+            }
+            else { /* add new course */
+                var query = `INSERT INTO Courses (CourseName, LecturerId, Credits, Description) VALUES ('${req.body.CourseName}','${req.body.LecturerId}', '${req.body.Credits}', '${req.body.Description}')`;
+                con.query(query, [req.body.CourseName, req.body.LecturerId],
+                    function (err, result) {
+                        if (err) {
+                            res.status(500);
+                            res.send(err);
+                            return;
+                        }
+                        if (result.length === 0) { /* query returned nothing */
+                            res.status(400);
+                            res.send("Create Course not complete");
+                        }
+                        else { /* send course details to client */
+                            const resMsg = {
+                                method: 'GET',
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify(
+                                    {
+                                        title: 'CreateCourse',
+                                        CreateCourseResult: 'OK',
+                                    })
+                            };
+                            console.log(resMsg);
+                            res.type('application/json');
+                            res.send(resMsg);
+                        }
+                    });
+            }
+        });
+});
