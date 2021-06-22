@@ -209,7 +209,7 @@ app.post('/register', (req, res) => {
 app.post('/createCourse', (req, res) => {
     console.log("POST createCourse");
     console.log(req.body);
-    if (req.body.title !== "createCourse") {
+    if (req.body.title !== "CreateCourse") {
         res.status(400);
         res.send("Something Went Wrong");
         return;

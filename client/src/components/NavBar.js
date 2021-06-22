@@ -1,3 +1,6 @@
+/* ########################################### */
+/* #         I M P O R T S                   # */
+/* ########################################### */
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Navbar from "react-bootstrap/Navbar";
@@ -47,6 +50,7 @@ class NavBar extends React.Component {
                         {console.log("isTch = " + isUserLecturer())}
                         {!isUserLecturer() ? <Nav.Link><Link to="/MyGrades">My Grades</Link></Nav.Link> : null}
                         {isUserLecturer() ? <Nav.Link><Link to="/Scoreboard">Scoreboard</Link></Nav.Link> : null}
+                        {isUserLecturer() ? <Nav.Link><Link to="/NewCourse">New Course</Link></Nav.Link> : null}
                         <Nav.Link><Link to="/About">About</Link></Nav.Link>
                         <Nav.Link><Link to="/" onClick={() => this.refreshPage()}>Logout</Link></Nav.Link>
 

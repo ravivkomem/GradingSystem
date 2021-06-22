@@ -39,10 +39,11 @@ class Login extends React.Component {
         }
         let responseData = await response.json();
         responseData = JSON.parse(responseData.body);
+        console.log(responseData)
         sessionStorage.setItem(
             'User',
             JSON.stringify({
-                UserId: this.state.UserId,
+                UserId: responseData.UserId,
                 UserName: responseData.UserName,
                 Permission: responseData.Permission,
             }));
