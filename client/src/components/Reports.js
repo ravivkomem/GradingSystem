@@ -19,6 +19,9 @@ class Reports extends React.Component {
             coursesResponse: null,
             ParticipantsResponse: null,
             SelectedCourse: null,
+            gradeAvg: 0,
+            data: [0, 0, 0, 0, 0],
+            labels: ['Not Graded', '0-55', '55-70', '70-85', '85-100'],
         }
     }
 
@@ -79,79 +82,35 @@ class Reports extends React.Component {
     };
 
     render() {
-        const labels = ['0-55', '55-70', '70-85', '85-100'];
-        const data = [0, 0, 0, 0];
+        // build histogram
+        this.state.data = [0, 0, 0, 0, 0];
+        this.state.gradeAvg = 0;
+        let gradeCount = 0;
 
-        if (this.state.ParticipantsResponse !== null)
-        {
+        if (this.state.ParticipantsResponse !== null) {
             this.state.ParticipantsResponse.forEach(student => {
-                if (student.Grade === null)
-                {
-                    // Skip...
-                }
-                else if (parseInt(student.Grade) < 55)
-                {
-                    data[0]++;
-                }
-                else if (parseInt(student.Grade) < 70)
-                {
-                    data[1]++;
-                }
-                else if (parseInt(student.Grade) < 85)
-                {
-                    data[2]++;
-                }
-                else
-                {
-                    data[3]++;
+                if (student.Grade === null) {
+                    this.state.data[0]++;
+                } else {
+                    this.state.gradeAvg += parseInt(student.Grade);
+                    gradeCount++;
+                    if (parseInt(student.Grade) < 55) {
+                        this.state.data[1]++;
+                    } else if (parseInt(student.Grade) < 70) {
+                        this.state.data[2]++;
+                    } else if (parseInt(student.Grade) < 85) {
+                        this.state.data[3]++;
+                    } else {
+                        this.state.data[4]++;
+                    }
                 }
             });
-
-            console.log("Data is: " + data);
+            this.state.gradeAvg /= gradeCount;
         }
 
-            // let jsonKeys = Object.keys(this.state.tableData[0]);
-            // let jsonVals = Object.values(this.state.tableData[0]);
-            // jsonKeys.splice(0, 2); // Delete the first two array elements
-            // jsonVals.splice(0, 2); // Delete the first two array elements
-    
-            // let GradesToGraph = [];
-            // let gradesSum = 0;
-            // for (let i = 0; i < jsonKeys.length; i++) {
-            //     GradesToGraph.push({label: jsonKeys[i], y: jsonVals[i]});
-            //     gradesSum += jsonVals[i];
-            // }
-            // let GradesAvg = gradesSum / jsonKeys.length;
-            // this.state1 = {
-            //     GradesToGraph: GradesToGraph,
-            //     GradesAverage: GradesAvg
-            // };
-
-        const options = {
-            animationEnabled: true,
-            theme: "light2",
-            height: 300,
-            axisY: {
-                maximum: 100,
-                stripLines: [
-                    {
-                        startValue: this.state1.GradesAverage,
-                        endValue: this.state1.GradesAverage - 1,
-                        color: "#d8d8d8",
-                        label: "Average = " + this.state1.GradesAverage,
-                        labelFontColor: "#a8a8a8",
-                    }
-                ]
-            },
-            data: [{
-                type: "column",
-                dataPoints: this.state1.GradesToGraph
-            }]
-        };
-        
         return (
             <center>
-                <Form className="container-fluid contact-info-container" onSubmit={this.getCourseParticipants}>
+                <Form className="container-fluid contact-info-container">
                     <h2 className="mb-3">Course Reports</h2>
                     {/* Loading Label */}
                     {this.state.coursesResponse === null ?
@@ -162,8 +121,10 @@ class Reports extends React.Component {
                         <Form.Label>Courses</Form.Label>
                         <Form.Control 
                             as="select"
-                            onChange={e => this.setState({SelectedCourse: JSON.parse(e.target.value)})}
-                        >
+                            onChange={e => {
+                                e.preventDefault();
+                                this.setState({SelectedCourse: JSON.parse(e.target.value)})
+                            }} >
                         <option>---</option>
                         {
                             this.state.coursesResponse === null ? null
@@ -178,17 +139,22 @@ class Reports extends React.Component {
                     </Form.Group>
                     
                     {/* View Histogram */}
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick={(e) => this.getCourseParticipants(e)}>
                         Display
                     </Button>
                 </Form>
 
                 {/* Histogram */}
-                {this.state.ParticipantsResponse === null ? null :
-                    <div>
-                    {/* <CanvasJSChart options={options} /> */}
-                    </div>
-                }
+                <Histogram 
+                    xLabels={this.state.labels}
+                    yValues={this.state.data}
+                    width='650'
+                    height='300'
+                    options={{fillColor: '#FFFFFF', strokeColor: '#0000ff'}}
+                    />
+                <div>
+                    Average Grade = {this.state.gradeAvg}
+                </div>
             </center>
         );
     }
