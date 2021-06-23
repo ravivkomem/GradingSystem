@@ -79,7 +79,7 @@ class StudentCourses extends React.Component {
                 })
             }
             <h2 className="mb-3">Credits Passed: {sumCreditsPassed}</h2>
-            <h2 className="mb-3">Average Grade: {avgGrade / avgCount}</h2>
+            <h2 className="mb-3">Average Grade: {(avgGrade / avgCount).toFixed(2)}</h2>
             </center>
         );
     }

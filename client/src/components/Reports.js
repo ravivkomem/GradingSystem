@@ -151,7 +151,7 @@ class Reports extends React.Component {
                 </Form>
 
                 {/* Histogram */}
-                <Histogram 
+                <Histogram
                     xLabels={this.state.labels}
                     yValues={this.state.data}
                     width='650'

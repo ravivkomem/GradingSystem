@@ -59,8 +59,8 @@ class LecturerCourses extends React.Component {
     render() {
         return (
             <Form className="container-fluid contact-info-container" onSubmit={this.getCourseStudents}>
-                <h2 className="mb-3">Lecturer Courses</h2>
                 <center>
+                    <h2 className="mb-3">Lecturer Courses</h2>
                     {this.state.coursesResponse === null ?
                     <div>Loading Data From Server</div>
                     : null}

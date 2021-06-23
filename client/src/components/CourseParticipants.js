@@ -63,19 +63,15 @@ class CourseParticipants extends React.Component {
             return;
         }
 
-        if (isNaN(this.state.studentsResponse[studentKey].Grade))
-        {
-            alert("Grade Must be a number..")
+        if (isNaN(this.state.studentsResponse[studentKey].Grade)) {
+            alert("Grade ,ust be a number..")
             return;
         }
-        if (newGrade < 0)
-        {
+        if (newGrade < 0) {
             alert("Grade must be a positive number :(");
             return;
         }
-
-        if (newGrade > 100)
-        {
+        if (newGrade > 100) {
             alert("Grade can not exceed 100 :(");
             return;
         }

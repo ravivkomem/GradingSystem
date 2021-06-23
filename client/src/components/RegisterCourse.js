@@ -94,8 +94,8 @@ class RegisterCourse extends React.Component {
     render() {
         return (
             <Form className="container-fluid contact-info-container" onSubmit={this.enrollCourse}>
-                <h2 className="mb-3">Enroll to Course</h2>
                 <center>
+                    <h2 className="mb-3">Enroll to Course</h2>
                     {this.state.coursesResponse === null ?
                     <h1>Loading Data From Server</h1>
                     : null}

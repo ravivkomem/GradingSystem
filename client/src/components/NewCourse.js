@@ -65,8 +65,8 @@ class NewCourse extends React.Component {
     render() {
         return (
             <Form className="container-fluid contact-info-container" onSubmit={this.createNewCourse}>
-                <h2 className="mb-3">Course Information</h2>
                 <center>
+                    <h2 className="mb-3">Course Information</h2>
                     {/* Course Name */}
                     <Form.Group controlId="coCourseName">
                         <Form.Label>Course Name</Form.Label>
