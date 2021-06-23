@@ -33,8 +33,7 @@ class NavBar extends React.Component {
     render() {
         return (
             <Navbar bg="dark" className='m-auto' variant="dark">
-
-                <Navbar.Brand href="#home" className="m-auto">
+                <Navbar.Brand href={sessionStorage.getItem('User') === null ? '\\' : '#home'} className="m-auto">
                     <img
                         src={logo}
                         width="140"
