@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import logo from '../img/Logo.png';
 import './style/NavBar.css'
-import {isUserLecturer, isUserLoggedIn} from "../Permissions";
+import {isLecturer, isStudent, isLoggedIn} from "../HelpFunctions";
 
 /* ########################################### */
 /* #  C L A S S   D E F I N I T I O N        # */
@@ -16,21 +16,6 @@ class NavBar extends React.Component {
     constructor(props) {
        super(props)
     }
-
-    componentDidMount() {
-        
-    }
-
-    state = {
-        reload: false
-    };
-
-    refreshPage = () => {
-        this.setState(
-            {reload: true},
-            () => this.setState({reload: false})
-        )
-    };
 
     render() {
         return (
@@ -44,14 +29,14 @@ class NavBar extends React.Component {
                     />
                 </Navbar.Brand>
 
-                {isUserLoggedIn() ?
+                {/* Display the actual elements if user is logged in */}
+                {isLoggedIn() ?
                     <Nav className="mr-auto">
                         <Nav.Link><Link to="/home">Home</Link></Nav.Link>
-                        {console.log("isTch = " + isUserLecturer())}
-                        {!isUserLecturer() ? <Nav.Link><Link to="/RegisterCourse">Enroll to Course</Link></Nav.Link> : null}
-                        {!isUserLecturer() ? <Nav.Link><Link to="/StudentCourses">Grades</Link></Nav.Link> : null}
-                        {isUserLecturer() ? <Nav.Link><Link to="/NewCourse">New Course</Link></Nav.Link> : null}
-                        {isUserLecturer() ? <Nav.Link><Link to="/LecturerCourses">Lecturer Courses</Link></Nav.Link> : null}
+                        {isStudent() ? <Nav.Link><Link to="/RegisterCourse">Enroll to Course</Link></Nav.Link> : null}
+                        {isStudent() ? <Nav.Link><Link to="/StudentCourses">Grades</Link></Nav.Link> : null}
+                        {isLecturer() ? <Nav.Link><Link to="/NewCourse">New Course</Link></Nav.Link> : null}
+                        {isLecturer() ? <Nav.Link><Link to="/LecturerCourses">Lecturer Courses</Link></Nav.Link> : null}
                         <Nav.Link><Link to="/Reports">Reports</Link></Nav.Link>
                         <Nav.Link><Link to="/About">About</Link></Nav.Link>
                         <Nav.Link><Link to="/" onClick={() => this.refreshPage()}>Logout</Link></Nav.Link>
