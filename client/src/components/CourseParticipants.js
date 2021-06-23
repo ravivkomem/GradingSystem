@@ -25,7 +25,7 @@ class CourseParticipants extends React.Component {
     componentDidMount = async () => {
         const setState = this.setState.bind(this);
         /* TODO: Perhaps add validation that this is the lecturer of the course... */
-        let userDetails = JSON.parse(sessionStorage.getItem('User'));
+        // let userDetails = JSON.parse(sessionStorage.getItem('User'));
         
         const requestMsg = {
             method: 'POST',

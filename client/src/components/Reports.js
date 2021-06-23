@@ -79,35 +79,41 @@ class Reports extends React.Component {
                 setState({ParticipantsResponse: response})
                 console.log(response)
             });
+
+         // build histogram
+         let newData = [0, 0, 0, 0, 0];
+         let newGradeAvg = 0.0;
+         let gradeCount = 0;
+ 
+         if (this.state.ParticipantsResponse !== null) {
+             this.state.ParticipantsResponse.forEach(student => {
+                 if (student.Grade === null) {
+                     newData[0]++;
+                 } else {
+                     newGradeAvg += parseInt(student.Grade);
+                     gradeCount++;
+                     if (parseInt(student.Grade) < 55) {
+                         newData[1]++;
+                     } else if (parseInt(student.Grade) < 70) {
+                         newData[2]++;
+                     } else if (parseInt(student.Grade) < 85) {
+                         newData[3]++;
+                     } else {
+                         newData[4]++;
+                     }
+                 }
+             });
+ 
+             console.log("Reports Data: " + newData);
+             newGradeAvg /= gradeCount;
+         }
+ 
+         this.setState({data: newData});
+         this.setState({gradeAvg: newGradeAvg});
     };
 
     render() {
-        // build histogram
-        this.state.data = [0, 0, 0, 0, 0];
-        this.state.gradeAvg = 0;
-        let gradeCount = 0;
-
-        if (this.state.ParticipantsResponse !== null) {
-            this.state.ParticipantsResponse.forEach(student => {
-                if (student.Grade === null) {
-                    this.state.data[0]++;
-                } else {
-                    this.state.gradeAvg += parseInt(student.Grade);
-                    gradeCount++;
-                    if (parseInt(student.Grade) < 55) {
-                        this.state.data[1]++;
-                    } else if (parseInt(student.Grade) < 70) {
-                        this.state.data[2]++;
-                    } else if (parseInt(student.Grade) < 85) {
-                        this.state.data[3]++;
-                    } else {
-                        this.state.data[4]++;
-                    }
-                }
-            });
-            this.state.gradeAvg /= gradeCount;
-        }
-
+       
         return (
             <center>
                 <Form className="container-fluid contact-info-container">
@@ -153,7 +159,7 @@ class Reports extends React.Component {
                     options={{fillColor: '#FFFFFF', strokeColor: '#0000ff'}}
                     />
                 <div>
-                    Average Grade = {this.state.gradeAvg}
+                    Average Grade = {this.state.gradeAvg.toFixed(2)}
                 </div>
             </center>
         );

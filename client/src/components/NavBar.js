@@ -9,14 +9,16 @@ import logo from '../img/Logo.png';
 import './style/NavBar.css'
 import {isUserLecturer, isUserLoggedIn} from "../Permissions";
 
-
+/* ########################################### */
+/* #  C L A S S   D E F I N I T I O N        # */
+/* ########################################### */
 class NavBar extends React.Component {
     constructor(props) {
-        super(props);
+       super(props)
     }
 
     componentDidMount() {
-        // sessionStorage.clear();
+        
     }
 
     state = {

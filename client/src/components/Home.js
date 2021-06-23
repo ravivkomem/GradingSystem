@@ -1,6 +1,12 @@
+/* ########################################### */
+/* #         I M P O R T S                   # */
+/* ########################################### */
 import React from "react";
 import Card from "react-bootstrap/Card";
 
+/* ########################################### */
+/* #  C L A S S   D E F I N I T I O N        # */
+/* ########################################### */
 export default function Home() {
     return (
         <div>

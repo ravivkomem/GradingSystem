@@ -1,9 +1,15 @@
+/* ########################################### */
+/* #         I M P O R T S                   # */
+/* ########################################### */
 import React from 'react'
 import {withRouter} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './style/Register.css'
 
+/* ########################################### */
+/* #  C L A S S   D E F I N I T I O N        # */
+/* ########################################### */
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -27,6 +33,10 @@ class Register extends React.Component {
         let Password = this.state.Password;
 
         /* UserName and Password Sanity check*/
+        if (UserId.length !== 9) {
+            alert("User Id must be 9 digits long");
+            return;
+        }
         if (UserName === "" || Password === "") {
             alert("UserName or Password missing");
             return;

@@ -1,8 +1,14 @@
-import React, {useContext, useState} from 'react'
+/* ########################################### */
+/* #         I M P O R T S                   # */
+/* ########################################### */
+import React from 'react'
 import {withRouter} from 'react-router-dom';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+/* ########################################### */
+/* #  C L A S S   D E F I N I T I O N        # */
+/* ########################################### */
 class Login extends React.Component {
 
     constructor(props) {
