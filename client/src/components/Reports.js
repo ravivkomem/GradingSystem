@@ -158,7 +158,6 @@ class Reports extends React.Component {
             </center>
         );
     }
-    
 }
 
 export default Reports;
