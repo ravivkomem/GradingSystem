@@ -13,10 +13,7 @@ import {isLecturer, isStudent, isLoggedIn} from "../HelpFunctions";
 /* #  C L A S S   D E F I N I T I O N        # */
 /* ########################################### */
 class NavBar extends React.Component {
-    constructor(props) {
-       super(props)
-    }
-
+   
     render() {
         return (
             <Navbar bg="dark" className='m-auto' variant="dark">
@@ -39,7 +36,7 @@ class NavBar extends React.Component {
                         {isLecturer() ? <Nav.Link><Link to="/LecturerCourses">Lecturer Courses</Link></Nav.Link> : null}
                         <Nav.Link><Link to="/Reports">Reports</Link></Nav.Link>
                         <Nav.Link><Link to="/About">About</Link></Nav.Link>
-                        <Nav.Link><Link to="/" onClick={() => this.refreshPage()}>Logout</Link></Nav.Link>
+                        <Nav.Link><Link to="/" onClick={() => sessionStorage.clear()}>Logout</Link></Nav.Link>
                     </Nav>
                     :
                     null
