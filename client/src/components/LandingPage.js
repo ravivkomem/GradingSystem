@@ -1,21 +1,27 @@
-import React from 'react'
-import {withRouter} from 'react-router-dom'
-import Register from './Register'
-import Login from './Login'
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import './style/Welcome.css'
+/* ########################################### */
+/* #         I M P O R T S                   # */
+/* ########################################### */
+// Import React Elements
+import React from 'react';
+import {withRouter} from 'react-router-dom';
+import {Container, Row, Col, Card} from 'react-bootstrap';
 
-class Welcome extends React.Component {
+// Import Components
+import Register from './Register';
+import Login from './Login';
+
+/* ########################################### */
+/* #  C L A S S   D E F I N I T I O N        # */
+/* ########################################### */
+/*  This is the landing page of our web application
+*   First page which load when a user enter the site.
+*   Has both login and register components within it.
+*/
+class LandingPage extends React.Component {
+
     constructor(props) {
         super(props);
         sessionStorage.clear();
-    }
-
-    componentDidMount() {
-        // sessionStorage.clear();
     }
 
     render() {
@@ -46,4 +52,4 @@ class Welcome extends React.Component {
     }
 }
 
-export default withRouter(Welcome);
+export default withRouter(LandingPage);

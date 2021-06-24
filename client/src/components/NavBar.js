@@ -1,12 +1,14 @@
 /* ########################################### */
 /* #         I M P O R T S                   # */
 /* ########################################### */
+// React Imports
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+// Images
 import logo from '../Images/Logo.png';
-import './style/NavBar.css'
+// Website Services
 import {isLecturer, isStudent, isLoggedIn} from "../HelpFunctions";
 
 /* ########################################### */
