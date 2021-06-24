@@ -5,7 +5,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Welcome from './components/Welcome'
-
+import ErrorPage from './components/ErrorPage';
 import About from "./components/About";
 import NewCourse from './components/NewCourse';
 import RegisterCourse from './components/RegisterCourse';
@@ -52,6 +52,8 @@ class App extends React.Component {
                         <Route path="/StudentCourses" component={StudentCourses} />
                         <Route path="/Reports" component ={Reports} />
                         <Route path="/CourseParticipants/:name" component={CourseParticipants} />
+                        {/* Default Path */}
+                        <Route component={ErrorPage} />
                     </Switch>
                 </Router>
             </div>
