@@ -5,7 +5,6 @@ import React from 'react'
 import {withRouter} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import './style/Register.css'
 
 /* ########################################### */
 /* #  C L A S S   D E F I N I T I O N        # */

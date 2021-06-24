@@ -2,7 +2,7 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 // Components
-import NavBar from './components/NavBar';
+import NavigationMenu from './components/NavigationMenu';
 import Home from './components/Home';
 import LandingPage from './components/LandingPage'
 import ErrorPage from './components/ErrorPage';
@@ -29,10 +29,11 @@ class App extends React.Component {
         return (
             <div className="App">
                 
+                {/* Font Style Set from google API */}
                 <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" />
 
                 <Router>
-                    <NavBar />
+                    <NavigationMenu />
                     <img alt='' src={background} style={{ position: 'absolute', width: '100vw', height: '100vh', repeat: 'no-repeat', left: 0, top: 0, bottom: 0, right: 0, zIndex: -1 }} />
 
                     <Switch>
