@@ -14,7 +14,7 @@ import StudentCourses from './components/StudentCourses';
 import CourseParticipants from './components/CourseParticipants';
 import Reports from './components/Reports';
 // Images
-import background from "./img/background.jpg"
+import background from "./Images/background.jpg"
 
 class App extends React.Component {
     constructor(props) {

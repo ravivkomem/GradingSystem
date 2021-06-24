@@ -2,7 +2,7 @@
 /* #         I M P O R T S                   # */
 /* ########################################### */
 import React from 'react';
-import errorImage from '../img/error404.jpg'
+import errorImage from '../Images/error404.jpg'
 
 /* ########################################### */
 /* #  C L A S S   D E F I N I T I O N        # */

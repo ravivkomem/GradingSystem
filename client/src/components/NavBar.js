@@ -5,7 +5,7 @@ import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import logo from '../img/Logo.png';
+import logo from '../Images/Logo.png';
 import './style/NavBar.css'
 import {isLecturer, isStudent, isLoggedIn} from "../HelpFunctions";
 
