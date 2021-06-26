@@ -11,12 +11,16 @@ export default function About() {
     return (
         <div>
             <center>
-                <Card style={{width: '40rem' , marginTop: '3rem'}} >
+                <Card style={{width: '30rem', marginTop: '3rem'}} >
                     <Card.Body>
                         <Card.Text >
-                            <h4><b>Ort Braude - Web Technologies</b></h4>
-                            Submitted by:
-                            Raviv Komem and Lior Wunsch
+                            <h4><b>Website by Raviv and Lior</b></h4>
+                            <br></br>
+                            Web Technologies course, Spring 2021, Ort Braude
+                            <br></br><br></br>
+                            Client side written in ReactJS
+                            <br></br>
+                            Server side written in Node.js, Express, MySQL Database
                         </Card.Text>
                     </Card.Body>
                 </Card>
