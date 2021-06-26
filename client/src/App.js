@@ -13,6 +13,7 @@ import LecturerCourses from './components/LecturerCourses';
 import StudentCourses from './components/StudentCourses';
 import CourseParticipants from './components/CourseParticipants';
 import Reports from './components/Reports';
+import Register from './components/Register';
 // Images
 import background from "./Images/background.jpg"
 
@@ -48,6 +49,7 @@ class App extends React.Component {
                         <Route path="/LecturerCourses" component={LecturerCourses} />
                         <Route path="/StudentCourses" component={StudentCourses} />
                         <Route path="/Reports" component ={Reports} />
+                        <Route path="/Register" component={Register} />
                         <Route path="/CourseParticipants/:name" component={CourseParticipants} />
 
                         {/* Default handling with error page */}

@@ -1,8 +1,9 @@
 /* ########################################### */
 /* #         I M P O R T S                   # */
 /* ########################################### */
-import React from 'react'
+import React from 'react';
 import {withRouter} from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -72,6 +73,7 @@ class Register extends React.Component {
         const responseData = await response.json();
         console.log(responseData);
         alert('Registration complete')
+        this.props.history.push('/');
     };
 
     onValueChange() {
@@ -82,64 +84,68 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div>
-                <center><h1 style={{fontFamily: 'Merriweather Sans, sans-serif'}}>Registration</h1></center>
-                <div>
-                    <Form onSubmit={this.registration}>
-                        <Form.Group controlId="fID">
-                            <Form.Label>UserId</Form.Label>
-                            <Form.Control
-                                id='regEmail'
-                                placeholder="UserId"
-                                value={this.state.UserId}
-                                onChange={e => this.setState({UserId: e.target.value})}
-                                required/>
-                        </Form.Group>
-
-                        <Form.Group controlId="fFullName">
-                            <Form.Label>UserName</Form.Label>
-                            <Form.Control
-                                placeholder="UserName"
-                                value={this.state.UserName}
-                                onChange={e => this.setState({UserName: e.target.value})}
-                                required/>
-                        </Form.Group>
-
-                        <Form.Group controlId="fPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                value={this.state.Password}
-                                onChange={e => this.setState({Password: e.target.value})}
-                                required />
-                        </Form.Group>
-                        
-                        <fieldset>
-                            <Form.Group controlId="fUserType" value={this.state.userType}>
-                                <Form.Label as="legend" column sm={2}>
-                                </Form.Label>
-                                <Form.Check
-                                    id='student'
-                                    type="radio"
-                                    label="Student"
-                                    checked={!this.state.Permission}
-                                    onChange={this.onValueChange}
-                                />
-                                <Form.Check
-                                    id='lecturer'
-                                    width='10px'
-                                    type="radio"
-                                    label="Lecturer"
-                                    checked={this.state.Permission}
-                                    onChange={this.onValueChange}
-                                />
+            <center>
+                <h1>Registration</h1>
+                <Card style={{background: 'rgba(252, 252, 252, 0.6)', height: 500, width: 500, borderRadius: 20}}>
+                    <Card.Body>
+                        <div>
+                        <Form onSubmit={this.registration}>
+                            <Form.Group controlId="fID">
+                                <Form.Label>UserId</Form.Label>
+                                <Form.Control
+                                    id='regEmail'
+                                    placeholder="UserId"
+                                    value={this.state.UserId}
+                                    onChange={e => this.setState({UserId: e.target.value})}
+                                    required/>
                             </Form.Group>
-                        </fieldset>
-                        <Button type="submit" id='registerBtn'> Register </Button>
-                    </Form>
-                </div>
-            </div>
+
+                            <Form.Group controlId="fFullName">
+                                <Form.Label>UserName</Form.Label>
+                                <Form.Control
+                                    placeholder="UserName"
+                                    value={this.state.UserName}
+                                    onChange={e => this.setState({UserName: e.target.value})}
+                                    required/>
+                            </Form.Group>
+
+                            <Form.Group controlId="fPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Password"
+                                    value={this.state.Password}
+                                    onChange={e => this.setState({Password: e.target.value})}
+                                    required />
+                            </Form.Group>
+                            
+                            <fieldset>
+                                <Form.Group controlId="fUserType" value={this.state.userType}>
+                                    <Form.Label as="legend" column sm={2}>
+                                    </Form.Label>
+                                    <Form.Check
+                                        id='student'
+                                        type="radio"
+                                        label="Student"
+                                        checked={!this.state.Permission}
+                                        onChange={this.onValueChange}
+                                    />
+                                    <Form.Check
+                                        id='lecturer'
+                                        width='10px'
+                                        type="radio"
+                                        label="Lecturer"
+                                        checked={this.state.Permission}
+                                        onChange={this.onValueChange}
+                                    />
+                                </Form.Group>
+                            </fieldset>
+                            <Button type="submit" id='registerBtn'> Register </Button>
+                        </Form>
+                    </div>
+                    </Card.Body>
+                </Card>  
+            </center>
         );
     }
 }

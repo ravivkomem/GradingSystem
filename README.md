@@ -1,5 +1,5 @@
-# Grade System
-JS React website by Raviv and Lior
+# Grade4U
+React Bootstrap, MySQL, JS website by Raviv and Lior
 
 Web Technologies course, Spring 2021, Ort Braude
 

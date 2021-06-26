@@ -1,9 +1,10 @@
 /* ########################################### */
 /* #         I M P O R T S                   # */
 /* ########################################### */
-import React from 'react'
-import {withRouter} from 'react-router-dom';
+import React from 'react';
+import {withRouter, Link} from 'react-router-dom';
 import Button from "react-bootstrap/Button";
+import { Container } from 'react-bootstrap';
 import Form from "react-bootstrap/Form";
 
 /* ########################################### */
@@ -58,8 +59,10 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <center><h1 style={{fontFamily: 'Merriweather Sans, sans-serif'}}>Login</h1></center>
-                <div>
+                <center>
+                    <h1>Login</h1>
+                    <Container style={{marginTop: '1rem', width: 500}}>
+
                     <Form>
                         <Form.Group controlId="fID">
                             <Form.Label>UserId</Form.Label>
@@ -79,9 +82,11 @@ class Login extends React.Component {
                                 onChange={e => this.setState({Password: e.target.value})}
                                 required/>
                         </Form.Group>
-                        <Button onClick={this.loginUser}>Login</Button>
+                        <Button onClick={this.loginUser} style={{marginRight: "25px"}}>Login</Button>
+                        <Link to="/Register">Signup</Link>
                     </Form>
-                </div>
+                    </Container>
+                </center>
             </div>
         );
     }
