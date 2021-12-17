@@ -37,7 +37,7 @@ class CourseParticipants extends React.Component {
                 })
         };
 
-        await fetch('/GetCourseStudents', requestMsg)
+        await fetch('/GetCourseStudents',requestMsg)
             .then((res) => res.json())
             .then(function (response) {
                 setState({studentsResponse: response})
