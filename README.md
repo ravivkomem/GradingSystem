@@ -4,7 +4,7 @@ The system allows the lecturer to manage all his courses from the start of the c
 A student will be able to enroll in courses, keep track of his grades and get an weighted average for all his grades.
 
 # Languages
-Client side written in ReactJS
+Client side written in ReactJS </br>
 Server side written in Node.js, Express, MySQL Database
 
 ## Instructions:
